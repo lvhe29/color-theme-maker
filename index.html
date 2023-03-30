@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#000000" />
+    <!-- 防止移动端输入时自动缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="./baked/baked.css" />
+    <style>
+      * {
+        font-family: monospace;
+        font-size: 20px;
+      }
+      .container {
+        padding: 16px;
+      }
+    </style>
+    <title>配色预览</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="container normal" id="show-all">
+        <span>normalText</span><br />
+        <span class="function">function</span><br />
+        <span class="value">value</span><br />
+        <span class="comment">// comment</span>
+        <span class="candidate"> copliot candidate text</span><br />
+        <span class="sys">const</span> <span>variable: </span>
+        <span class="type">number</span>
+        <span class="operator"> = </span><span class="value">123</span><span class="operator">;</span><br />
+        <span class="value">1234567890</span><br />
+        <span class="boolean">true false</span><br />
+        <span class="string">'this is a string.'</span><br />
+        <span class="value">1234567890</span><br />
+      </div>
+    </div>
+    <script>
+      const showAll = document.querySelector('#show-all');
+    </script>
+  </body>
+</html>
