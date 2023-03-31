@@ -68,57 +68,110 @@ vscodeTheme.tokenColors = [
 ];
 
 const scopesMap = {
-  normal: ['variable.parameter', 'variable.other.readwrite'],
+  normal: ['variable'],
+
   comment: ['comment'],
-  sys: ['storage.type', 'keyword.control', 'keyword.operator.new'],
+
+  sys: [
+    'storage.type',
+    'storage.modifier',
+    'keyword',
+    'meta.function.definition',
+    
+    // 从 operator 中排除
+    'meta.function-call keyword.operator.expression',
+
+    // 从 logic 分组中排除
+    'meta.import keyword.control',
+    'keyword.control.import',
+    'keyword.control.export',
+    'keyword.control.from',
+    'keyword.control.as',
+    'keyword.control.directive', // C 的 #include #define 等
+  ],
+
   operator: [
+    'constant.other.option',
     'keyword.operator',
-    'punctuation.separator',
-    'punctuation.terminator',
-    'punctuation.definition.typeparameters',
-    'punctuation.definition.tag',
-    // 'punctuation.definition.block',
-    'storage.type.function.arrow',
-    'meta.brace',
-    'punctuation.section.embedded',
-    'punctuation.definition.template-expression',
-    'source.css',
     'keyword.other.unit',
-    'punctuation.definition.markdown',
-    'punctuation.definition.character-class.regexp',
-    'punctuation.definition.heading.markdown',
-    'punctuation.definition.list.begin.markdown',
-    'punctuation.definition.list.end.markdown',
-    'punctuation.definition.metadata.markdown',
-    'punctuation.definition.quote.begin.markdown',
-    // 'meta.paragraph.markdown',
+    'storage.type.function.arrow',
+    'punctuation',
+    // 'punctuation.definition',
+    // 'punctuation.separator',
+    // 'punctuation.terminator',
+    // 'punctuation.accessor',
+    // 'punctuation.section',
+    // 'punctuation.section.embedded',
+    'meta.brace',
     'meta.separator.markdown',
+    // 'punctuation.definition.tag',
+    // 'punctuation.definition.typeparameters',
+    // 'punctuation.definition.template-expression',
+    // 'punctuation.definition.markdown',
+    // 'punctuation.definition.character-class.regexp',
+    // 'punctuation.definition.heading.markdown',
+    // 'punctuation.definition.list.begin.markdown',
+    // 'punctuation.definition.list.end.markdown',
+    // 'punctuation.definition.metadata.markdown',
+    // 'punctuation.definition.quote.begin.markdown',
   ],
+
   logic: [
-    'keyword.control.conditional',
-    'keyword.control.flow',
-    'keyword.control.switch',
-    'keyword.control.loop',
+    'keyword.control',
+    // 'keyword.control.r',
+    // 'keyword.control.c',
+    // 'keyword.control.julia',
+    // 'keyword.control.lisp',
+    // 'keyword.control.lua',
+    // 'keyword.control.go',
+    // 'keyword.control.conditional',
+    // 'keyword.control.flow',
+    // 'keyword.control.switch',
+    // 'keyword.control.loop',
+    // 'keyword.control.rust',
+    // 'keyword.control.shell',
+    // 'keyword.control.do',
+    // 'keyword.control.else',
+    // 'keyword.control.for',
+    // 'keyword.control.if',
+    // 'keyword.control.else',
+    // 'keyword.control.elseif',
+    // 'keyword.control.while',
+    // 'keyword.control.end',
   ],
-  function: ['entity.name.function', 'support.function', 'meta.function-call.generic'],
-  type: ['support.type'],
+
+  function: [
+    'entity.name.function',
+    'support.function',
+    'meta.function-call.generic',
+  ],
+
+  type: ['support.type', 'entity.name.type', 'storage.type.haskell'],
   value: ['constant.numeric'],
-  string: ['string'],
+  string: ['string', 'punctuation.definition.string'],
   boolean: ['constant.language'],
-  valueSpecial: ['support.constant.property-value'],
+  valueSpecial: ['support.constant.property-value', 'constant.other.color'],
+
   property: [
     'variable.other.property',
     'variable.other.object.property',
     'support.type.property-name',
   ],
+
   object: ['variable.other.object'],
   tag: ['entity.name.tag'],
-  tagSpecial: ['support.class.component'],
+  tagSpecial: ['support.class.component', 'markup.heading'],
   tagProperty: ['entity.other.attribute-name'],
+
+  _test: [
+    // only for test
+    // 'keyword.operator.word',
+  ],
 };
 
 Object.keys(scopesMap).forEach((key) => {
   const scope = scopesMap[key];
+  if (!scope || scope?.length === 0) return;
   console.log(key, '-- [', c[key].join(' '), ']');
   console.log(scope.join('\n'), '\n');
   vscodeTheme.tokenColors.push(makeTokenColor(scope, ...c[key]));

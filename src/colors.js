@@ -23,7 +23,7 @@ export const L = {
   dark: 56,
   darker: 46,
   black: 34,
-  background: 2,
+  background: 3,
 };
 
 // 维度: 饱和度(C)
@@ -31,7 +31,7 @@ export const C = {
   grey: 0,
   low: 13,
   mid: 28,
-  high: 38,
+  high: 36,
 };
 
 // 维度: 色相(H)
@@ -44,36 +44,36 @@ export const H = {
 
 // 维度: 字符样式(Style)
 export const Style = {
-  none: '',
+  none: 'none',
   bold: 'bold',
   italic: 'italic',
   underline: 'underline',
 };
 
 const colorBolderBias = 12;
-const lBias = 6;
+const lBias = 5;
 const hBias = 20;
 const cBias = 7;
 
 const fg = LCH(L.normal, C.grey);
 const bg = LCH(L.background, C.grey);
 const fg_property = LCH(L.normal - lBias, C.grey);
-const fg_sys = LCH(L.dark - lBias, C.grey);
+const fg_sys = LCH(L.dark, C.grey);
 const fg_operator = LCH(L.darker, C.grey);
 const fg_comment = LCH(L.black, C.grey);
 
 const fg_function = LCH(L.normal, C.low, H.yellow);
 const fg_extension = LCH(L.black - colorBolderBias, C.low, H.fuchsia);
-const fg_type = LCH(L.darker, C.low + cBias, H.blue);
+const fg_type = LCH(L.dark - lBias, C.low + cBias, H.blue);
 
 const fg_string = LCH(L.normal, C.high, H.blue - 0.4 * hBias);
 const fg_value = LCH(L.normal - lBias, C.high, H.blue + 1.6 * hBias);
-const fg_boolean = LCH(L.normal - lBias, C.high, H.blue + 2 * hBias);
+const fg_boolean = LCH(L.normal - lBias, C.high - cBias, H.blue + 2 * hBias);
 
 const fg_logic = LCH(L.bright, C.grey);
 const fg_tag = LCH(L.dark - colorBolderBias, C.mid, H.red);
 const fg_tag1 = LCH(L.dark - colorBolderBias + lBias, C.mid, H.red + hBias);
-const fg_tag_property = LCH(L.darker, C.low, H.red);
+const fg_tag_property = LCH(L.darker + lBias, C.low, H.red);
 
 export const colors = {
   normal: [fg, bg],
@@ -86,7 +86,7 @@ export const colors = {
   valueSpecial: [fg_boolean, bg, Style.underline],
   candidate: [fg_extension, bg, Style.bold],
   comment: [fg_comment, bg, Style.italic],
-  operator: [fg_operator, bg],
+  operator: [fg_operator, bg, Style.none],
   type: [fg_type, bg, Style.italic],
 
   object: [fg, bg],
@@ -95,6 +95,8 @@ export const colors = {
   tag: [ fg_tag, bg, Style.bold],
   tagSpecial: [fg_tag1, bg, Style.bold],
   tagProperty: [fg_tag_property, bg, Style.italic],
+  
+  _test: ['#ff7777', '#aaaaaa', Style.bold],
 };
 
 colors._fg = (key) => colors[key][0];
